@@ -9,41 +9,35 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
-import { JSONData } from "./constants/constants";
 import { visuallyHidden } from "@mui/utils";
-import { getJobDataByYear } from "../helper/formatedData";
+import { getJobTitleCountsByYear } from "../helper/formatedData";
 
 interface Data {
   id: number;
   year: number;
-  total_jobs: number;
-  avg_salary: number;
+  job_title: string;
+  no_of_Jobs: number;
 }
 
 function createData(
   id: number,
   year: number,
-  total_jobs: number,
-  avg_salary: number
+  job_title: string,
+  no_of_Jobs: number
 ): Data {
   return {
     id,
     year,
-    total_jobs,
-    avg_salary,
+    job_title,
+    no_of_Jobs,
   };
 }
 
-const jobData = getJobDataByYear(JSONData);
-console.log(jobData);
-const rows: any[] = Object.keys(jobData).map((year) =>
-  createData(
-    Number(year),
-    Number(year),
-    jobData[Number(year)].totalJobs,
-    jobData[Number(year)].averageSalary
-  )
-);
+const jobTitleCounts = getJobTitleCountsByYear(2024);
+//console.log(jobTitleCounts);
+const rows: any[] = Object.keys(jobTitleCounts).forEach((jobTitle, index) => {
+  createData(index, 2024, jobTitle, jobTitleCounts[jobTitle]);
+});
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -165,7 +159,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-export default function MainTable() {
+export default function ModalTable() {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<string>("year");
   const [selected, setSelected] = React.useState("");
@@ -184,7 +178,7 @@ export default function MainTable() {
 
   const handleClick = (event: React.MouseEvent<unknown>, row: any) => {
     const selectedIndex = row;
-   // console.log(selectedIndex);
+    // console.log(selectedIndex);
     setSelected(selectedIndex);
   };
 

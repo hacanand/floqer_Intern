@@ -28,3 +28,30 @@ import { JSONData } from "../components/constants/constants";
 
   return jobDataByYear;
 }
+
+export function getJobTitleCountsByYear(workYear: number): {
+  [jobTitle: string]: number;
+} {
+  const jobTitleCounts: { [jobTitle: string]: number } = {};
+
+  // Filter data for the given work year
+  const filteredData = JSONData.filter((data) => data.work_year === workYear);
+
+  // Iterate through the filtered data and count job titles
+  filteredData.forEach((data) => {
+    const jobTitle = data.job_title;
+    if (jobTitleCounts[jobTitle]) {
+      jobTitleCounts[jobTitle]++;
+    } else {
+      jobTitleCounts[jobTitle] = 1;
+    }
+  });
+
+  return jobTitleCounts;
+}
+ 
+const jobTitleCounts2024 = getJobTitleCountsByYear(2024);
+Object.keys(jobTitleCounts2024).forEach((jobTitle) => {
+  console.log(jobTitle , jobTitleCounts2024[jobTitle]);
+});
+console.log(jobTitleCounts2024);
