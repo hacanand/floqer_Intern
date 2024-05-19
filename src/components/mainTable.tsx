@@ -35,7 +35,7 @@ function createData(
 }
 
 const jobData = getJobDataByYear(JSONData);
-console.log(jobData);
+//console.log(jobData);
 const rows: any[] = Object.keys(jobData).map((year) =>
   createData(
     Number(year),

@@ -35,7 +35,8 @@ function createData(
 
 const jobTitleCounts = getJobTitleCountsByYear(2024);
 //console.log(jobTitleCounts);
-const rows: any[] = Object.keys(jobTitleCounts).forEach((jobTitle, index) => {
+const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
+  //console.log(jobTitle, jobTitleCounts[jobTitle]);
   createData(index, 2024, jobTitle, jobTitleCounts[jobTitle]);
 });
 
@@ -93,16 +94,16 @@ const headCells: readonly HeadCell[] = [
     label: "Year",
   },
   {
-    id: "total_jobs",
-    numeric: true,
+    id: "job_title",
+    numeric: false,
     disablePadding: false,
-    label: "Total Jobs",
+    label: "Job Title",
   },
   {
-    id: "avg_salary",
+    id: "no_of_Jobs",
     numeric: true,
     disablePadding: false,
-    label: "Average Salary",
+    label: " No of Jobs",
   },
 ];
 
