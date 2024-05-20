@@ -9,9 +9,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
-import { JSONData } from "./constants/constants";
+import { JSONData, yearData } from "./constants/constants";
 import { visuallyHidden } from "@mui/utils";
 import { getJobDataByYear } from "../helper/formatedData";
+import { useSetAtom } from "jotai";
 
 interface Data {
   id: number;
@@ -148,6 +149,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
           >
             <TableSortLabel
               active={orderBy === headCell.id}
+              className="text-xl font-bold "
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id as keyof Data)}
             >
@@ -170,6 +172,10 @@ export default function MainTable() {
   const [orderBy, setOrderBy] = React.useState<string>("year");
   const [selected, setSelected] = React.useState("");
   const [page, setPage] = React.useState(0);
+  //jotai
+  
+  const selectedRow=useSetAtom(yearData);
+
 
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -184,7 +190,8 @@ export default function MainTable() {
 
   const handleClick = (event: React.MouseEvent<unknown>, row: any) => {
     const selectedIndex = row;
-   // console.log(selectedIndex);
+    selectedRow(selectedIndex);
+    console.log(selectedIndex);
     setSelected(selectedIndex);
   };
 

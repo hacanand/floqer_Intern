@@ -50,8 +50,8 @@ export function getJobTitleCountsByYear(workYear: number): {
   return jobTitleCounts;
 }
  
-const jobTitleCounts2024 = getJobTitleCountsByYear(2024);
-Object.keys(jobTitleCounts2024).forEach((jobTitle) => {
-  console.log(jobTitle , jobTitleCounts2024[jobTitle]);
-});
-console.log(jobTitleCounts2024);
+// const jobTitleCounts2024 = getJobTitleCountsByYear(2024);
+// Object.keys(jobTitleCounts2024).forEach((jobTitle) => {
+//   console.log(jobTitle , jobTitleCounts2024[jobTitle]);
+// });
+// console.log(jobTitleCounts2024);

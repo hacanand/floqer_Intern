@@ -35,9 +35,15 @@ function createData(
 
 const jobTitleCounts = getJobTitleCountsByYear(2024);
 //console.log(jobTitleCounts);
+let year:number = 2024;
 const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
-  //console.log(jobTitle, jobTitleCounts[jobTitle]);
-  createData(index, 2024, jobTitle, jobTitleCounts[jobTitle]);
+ // console.log(jobTitle, jobTitleCounts[jobTitle]);
+ return createData(
+    index,
+    year,
+    jobTitle,
+    jobTitleCounts[jobTitle]
+  );
 });
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -81,6 +87,7 @@ function stableSort<T>(
 
 interface HeadCell {
   disablePadding: boolean;
+   
   id: string;
   label: string;
   numeric: boolean;
@@ -91,6 +98,7 @@ const headCells: readonly HeadCell[] = [
     id: "year",
     numeric: true,
     disablePadding: true,
+    
     label: "Year",
   },
   {
@@ -113,7 +121,6 @@ interface EnhancedTableProps {
     event: React.MouseEvent<unknown>,
     property: keyof Data
   ) => void;
-
   order: Order;
   orderBy: string;
   rowCount: number;
@@ -123,7 +130,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   const {
     order,
     orderBy,
-
     onRequestSort,
   } = props;
   const createSortHandler =
@@ -137,12 +143,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            align="right"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
+              className="text-xl font-bold "
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id as keyof Data)}
             >
@@ -160,13 +167,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-export default function ModalTable() {
+export default function ModalTable({}) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<string>("year");
   const [selected, setSelected] = React.useState("");
   const [page, setPage] = React.useState(0);
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -179,7 +186,7 @@ export default function ModalTable() {
 
   const handleClick = (event: React.MouseEvent<unknown>, row: any) => {
     const selectedIndex = row;
-    // console.log(selectedIndex);
+     console.log(selectedIndex);
     setSelected(selectedIndex);
   };
 
@@ -207,8 +214,18 @@ export default function ModalTable() {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
+      <Paper
+        sx={{
+          width: "100%",
+          mb: 2,
+          backgroundColor:"green",
+        }}
+      >
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -243,8 +260,8 @@ export default function ModalTable() {
                       {row.year}
                     </TableCell>
 
-                    <TableCell align="right">{row.total_jobs}</TableCell>
-                    <TableCell align="right">{row.avg_salary}</TableCell>
+                    <TableCell align="right">{row.job_title}</TableCell>
+                    <TableCell align="right">{row.no_of_Jobs}</TableCell>
                   </TableRow>
                 );
               })}

@@ -7,10 +7,10 @@ import ModalTable from "./helper/modalTable";
 function App() {
   return (
     <div className="w-full flex p-10 gap-10">
-      <div className="flex flex-col  w-1/2">
+      <div className="flex flex-col  w-1/2 ">
         <h1 className="font-bold self-center text-xl underline">ML job market</h1>
         <MainTable />
-        <ModalTable />
+          <DataModal />
       </div>
       <div className="flex flex-col w-full"
       >
