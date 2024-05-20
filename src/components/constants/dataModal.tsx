@@ -1,16 +1,20 @@
 import { useState } from "react";
 import ModalTable from "../../helper/modalTable";
+import { isModalOpen } from "./constants";
+import { useAtomValue, useSetAtom } from "jotai";
 
  export const DataModal = () => {
-  const [openModal, setOpenModal] = useState(true);
+   const [openModal, setOpenModal] = useState(true);
+   const modalState=useAtomValue(isModalOpen);
+   const closeModal = useSetAtom(isModalOpen)
   return (
     <>
-      {openModal && (
+      {modalState && (
         <div className="absolute pt-48 backdrop-blur-sm ">
           <div className="flex justify-center">
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-t"
-              onClick={() => setOpenModal(!openModal)}
+              onClick={() => closeModal(!modalState)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

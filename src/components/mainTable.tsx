@@ -9,10 +9,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
-import { JSONData, yearData } from "./constants/constants";
+import { isModalOpen, JSONData, yearData } from "./constants/constants";
 import { visuallyHidden } from "@mui/utils";
 import { getJobDataByYear } from "../helper/formatedData";
-import { useSetAtom } from "jotai";
+import {  useAtomValue, useSetAtom } from "jotai";
 
 interface Data {
   id: number;
@@ -175,12 +175,14 @@ export default function MainTable() {
   //jotai
   
   const selectedRow=useSetAtom(yearData);
-
+    const selectedYear = useAtomValue(yearData);
+    const modalState=useSetAtom(isModalOpen);
+    //console.log(selectedYear.year);
 
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
+    _event: React.MouseEvent<unknown>,
     property: keyof Data
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -188,14 +190,15 @@ export default function MainTable() {
     setOrderBy(property);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, row: any) => {
+  const handleClick = (_event: React.MouseEvent<unknown>, row: any) => {
     const selectedIndex = row;
     selectedRow(selectedIndex);
-    console.log(selectedIndex);
+    modalState(true);
+   // console.log(selectedIndex);
     setSelected(selectedIndex);
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 

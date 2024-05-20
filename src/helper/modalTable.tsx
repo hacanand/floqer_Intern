@@ -11,6 +11,8 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { getJobTitleCountsByYear } from "../helper/formatedData";
+import { useAtomValue } from "jotai";
+import { yearData } from "../components/constants/constants";
 
 interface Data {
   id: number;
@@ -31,20 +33,9 @@ function createData(
     job_title,
     no_of_Jobs,
   };
-}
+} 
+ 
 
-const jobTitleCounts = getJobTitleCountsByYear(2024);
-//console.log(jobTitleCounts);
-let year:number = 2024;
-const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
- // console.log(jobTitle, jobTitleCounts[jobTitle]);
- return createData(
-    index,
-    year,
-    jobTitle,
-    jobTitleCounts[jobTitle]
-  );
-});
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -116,7 +107,7 @@ const headCells: readonly HeadCell[] = [
 ];
 
 interface EnhancedTableProps {
-  numSelected: number;
+  
   onRequestSort: (
     event: React.MouseEvent<unknown>,
     property: keyof Data
@@ -167,13 +158,23 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-export default function ModalTable({}) {
+export default function ModalTable() {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<string>("year");
-  const [selected, setSelected] = React.useState("");
   const [page, setPage] = React.useState(0);
-
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const selectedYear = useAtomValue(yearData);
+   //console.log(selectedYear.year);
+//@ts-ignore
+const jobTitleCounts = getJobTitleCountsByYear(selectedYear.year);
+//console.log(jobTitleCounts);
+ 
+const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
+  // console.log(jobTitle, jobTitleCounts[jobTitle]);
+  //@ts-ignore
+  return createData(index, selectedYear.year, jobTitle, jobTitleCounts[jobTitle]);
+});
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -184,11 +185,7 @@ export default function ModalTable({}) {
     setOrderBy(property);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, row: any) => {
-    const selectedIndex = row;
-     console.log(selectedIndex);
-    setSelected(selectedIndex);
-  };
+  
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -233,7 +230,7 @@ export default function ModalTable({}) {
             size={"medium"}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
+             
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -246,9 +243,9 @@ export default function ModalTable({}) {
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row)}
+                    
                     key={row.id}
-                    sx={{ cursor: "pointer" }}
+                    
                   >
                     <TableCell
                       component="th"

@@ -2,8 +2,7 @@
 import { DataModal } from "./components/constants/dataModal";
 import MainTable from "./components/mainTable";
 import LineGraph from "./components/lineGraph";
-import EnhancedTable from "./components/mainTable";
-import ModalTable from "./helper/modalTable";
+ 
 function App() {
   return (
     <div className="w-full flex p-10 gap-10">
