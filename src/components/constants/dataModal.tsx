@@ -1,16 +1,23 @@
  
+import React from "react";
 import ModalTable from "../../helper/modalTable";
 import { isModalOpen } from "./constants";
 import { useAtomValue, useSetAtom } from "jotai";
 
  export const DataModal = () => {
-   
+   const ref=React.useRef(null);
    const modalState=useAtomValue(isModalOpen);
    const closeModal = useSetAtom(isModalOpen)
+   const changeState = () => {
+      //@ts-ignore
+      if (ref.current && !ref.current.contains(event.target)) {
+        closeModal(!modalState);
+      }
+    }
   return (
     <>
       {modalState && (
-        <div className="absolute pt-48 backdrop-blur-sm ">
+        <div className="absolute pt-48 backdrop-blur-sm " onClick={changeState}>
           <div className="flex justify-center">
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-t"
@@ -32,7 +39,10 @@ import { useAtomValue, useSetAtom } from "jotai";
               </svg>
             </button>
           </div>
-          <ModalTable />
+          <div className="" ref={ref}>
+             <ModalTable />
+          </div>
+         
         </div>
       )}
     </>
