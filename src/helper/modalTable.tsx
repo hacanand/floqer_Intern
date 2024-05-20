@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { getJobTitleCountsByYear } from "../helper/formatedData";
+import { getJobTitleCountsByYear } from "./formattedData";
 import { useAtomValue } from "jotai";
 import { yearData } from "../components/constants/constants";
 
@@ -177,7 +177,7 @@ const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
 });
 
   const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
+    _event: React.MouseEvent<unknown>,
     property: keyof Data
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -187,7 +187,7 @@ const rows: any[] = Object.keys(jobTitleCounts).map((jobTitle, index) => {
 
   
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 

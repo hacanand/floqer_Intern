@@ -1,10 +1,10 @@
-import { useState } from "react";
+ 
 import ModalTable from "../../helper/modalTable";
 import { isModalOpen } from "./constants";
 import { useAtomValue, useSetAtom } from "jotai";
 
  export const DataModal = () => {
-   const [openModal, setOpenModal] = useState(true);
+   
    const modalState=useAtomValue(isModalOpen);
    const closeModal = useSetAtom(isModalOpen)
   return (

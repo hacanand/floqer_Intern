@@ -11,8 +11,8 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { isModalOpen, JSONData, yearData } from "./constants/constants";
 import { visuallyHidden } from "@mui/utils";
-import { getJobDataByYear } from "../helper/formatedData";
-import {  useAtomValue, useSetAtom } from "jotai";
+import { getJobDataByYear } from "../helper/formattedData";
+import {   useSetAtom } from "jotai";
 
 interface Data {
   id: number;
@@ -175,7 +175,7 @@ export default function MainTable() {
   //jotai
   
   const selectedRow=useSetAtom(yearData);
-    const selectedYear = useAtomValue(yearData);
+    //const selectedYear = useAtomValue(yearData);
     const modalState=useSetAtom(isModalOpen);
     //console.log(selectedYear.year);
 
