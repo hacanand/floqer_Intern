@@ -1,6 +1,6 @@
  
 import { getJobDataByYear } from "../helper/formattedData";
-import { JSONData } from "./constants/constants";
+import { JSONData } from "../constants/constants";
  
 import { Line } from "react-chartjs-2";
 import {

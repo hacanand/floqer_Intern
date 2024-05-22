@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { getJobTitleCountsByYear } from "./formattedData";
 import { useAtomValue } from "jotai";
-import { yearData } from "../components/constants/constants";
+import { yearData } from "../constants/constants";
 
 interface Data {
   id: number;

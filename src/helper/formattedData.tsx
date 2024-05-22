@@ -1,4 +1,4 @@
-import { JSONData } from "../components/constants/constants";
+import { JSONData } from "../constants/constants";
 
  
 

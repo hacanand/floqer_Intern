@@ -1,5 +1,5 @@
 
-import { DataModal } from "./components/constants/dataModal";
+import { DataModal } from "./constants/dataModal";
 import MainTable from "./components/mainTable";
 import LineGraph from "./components/lineGraph";
  

@@ -1,6 +1,6 @@
  
 import React from "react";
-import ModalTable from "../../helper/modalTable";
+import ModalTable from "../helper/modalTable";
 import { isModalOpen } from "./constants";
 import { useAtomValue, useSetAtom } from "jotai";
 
