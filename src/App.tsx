@@ -2,6 +2,8 @@
 import { DataModal } from "./constants/dataModal";
 import MainTable from "./components/mainTable";
 import LineGraph from "./components/lineGraph";
+ 
+//import {Langchain_JSON} from './components/chatLLM'
 // import { useState } from "react";
  
  
@@ -26,6 +28,10 @@ function App() {
 
   // }
 
+  // const langChainJSON = new Langchain_JSON();
+  // langChainJSON.useFaissVectorStore('What is the job market for ML?')
+
+  
   return (
     <>
       <div className="w-full flex p-10 gap-10">
