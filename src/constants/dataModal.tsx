@@ -39,7 +39,7 @@ import { useAtomValue, useSetAtom } from "jotai";
               </svg>
             </button>
           </div>
-          <div className="" ref={ref}>
+          <div  ref={ref}>
              <ModalTable />
           </div>
          
