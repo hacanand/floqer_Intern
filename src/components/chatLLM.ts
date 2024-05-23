@@ -17,7 +17,7 @@
 //       temperature: 0.5,
 //       modelName: "gpt-3.5-turbo",
 //         streaming: true,
-//       apiKey:"sk-proj-hsc596bJvdsMHZBriMwdT3BlbkFJe0hjg6Jp3GonMu5rIHnT",
+//       apiKey:process.env.REACT_APP_OPENAI_API_KEY ,
    
 //     });
 //   }
@@ -65,7 +65,7 @@ export const run = async () => {
         temperature: 0.5,
         modelName: "gpt-3.5-turbo",
         streaming: true,
-        apiKey: "sk-proj-hsc596bJvdsMHZBriMwdT3BlbkFJe0hjg6Jp3GonMu5rIHnT",
+        apiKey: process.env.REACT_APP_OPENAI_API_KEY ,
     });
     const text = fs.readFileSync('./csvjson.json', 'utf8');
     const textSplitter = new RecursiveCharacterTextSplitter({
@@ -77,7 +77,7 @@ export const run = async () => {
         retriever: vectorsStore.asRetriever(),
         combineDocsChain: [],
     })
-    const res = await chain.c({
+    const res = await chain.call({
         query: "What is the job market for ML?",
         input_documents: docs,
     });
