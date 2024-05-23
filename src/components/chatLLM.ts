@@ -53,33 +53,33 @@
 
 
 
-import { HNSWLib } from "@langchain/community/vectorstores/hnswlib";
-import { OpenAI, OpenAIEmbeddings } from "@langchain/openai";
-import fs from "fs";
-import { VectorDBQAChain } from "langchain/chains";
-import { createRetrievalChain } from "langchain/chains/retrieval";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+// import { HNSWLib } from "@langchain/community/vectorstores/hnswlib";
+// import { OpenAI, OpenAIEmbeddings } from "@langchain/openai";
+// import fs from "fs";
+// import { VectorDBQAChain } from "langchain/chains";
+// import { createRetrievalChain } from "langchain/chains/retrieval";
+// import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
-export const run = async () => {
-    const model = new OpenAI({
-        temperature: 0.5,
-        modelName: "gpt-3.5-turbo",
-        streaming: true,
-        apiKey: process.env.REACT_APP_OPENAI_API_KEY ,
-    });
-    const text = fs.readFileSync('./csvjson.json', 'utf8');
-    const textSplitter = new RecursiveCharacterTextSplitter({
-        chunkSize: 2000,
-    });
-    const docs = await textSplitter.createDocuments([text]);
-    const vectorsStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
-    const chain = createRetrievalChain({
-        retriever: vectorsStore.asRetriever(),
-        combineDocsChain: [],
-    })
-    const res = await chain.call({
-        query: "What is the job market for ML?",
-        input_documents: docs,
-    });
-    console.log(res);
-}
+// export const run = async () => {
+//     const model = new OpenAI({
+//         temperature: 0.5,
+//         modelName: "gpt-3.5-turbo",
+//         streaming: true,
+//         apiKey: process.env.REACT_APP_OPENAI_API_KEY ,
+//     });
+//     const text = fs.readFileSync('./csvjson.json', 'utf8');
+//     const textSplitter = new RecursiveCharacterTextSplitter({
+//         chunkSize: 2000,
+//     });
+//     const docs = await textSplitter.createDocuments([text]);
+//     const vectorsStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
+//     const chain = createRetrievalChain({
+//         retriever: vectorsStore.asRetriever(),
+//         combineDocsChain: [],
+//     })
+//     const res = await chain.call({
+//         query: "What is the job market for ML?",
+//         input_documents: docs,
+//     });
+//     console.log(res);
+// }
