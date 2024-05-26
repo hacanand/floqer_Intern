@@ -53,8 +53,8 @@ const jobDataByYear = getJobDataByYear(JSONData);
   };
  
   return (
-    <div className="w-full  ">
-      <Line data={chartData} options={chartOptions} className="" />
+    <div className="w-full">
+      <Line data={chartData} options={chartOptions} />
     </div>
   );
 };

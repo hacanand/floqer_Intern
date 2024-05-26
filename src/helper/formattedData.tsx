@@ -22,8 +22,9 @@ import { JSONData } from "../constants/constants";
   });
 
   Object.keys(jobDataByYear).forEach((year) => {
-    jobDataByYear[Number(year)].averageSalary /=
+   const jobData = jobDataByYear[Number(year)].averageSalary /
       jobDataByYear[Number(year)].totalJobs;
+    jobDataByYear[Number(year)].averageSalary = parseFloat(jobData.toFixed(4));
   });
 
   return jobDataByYear;

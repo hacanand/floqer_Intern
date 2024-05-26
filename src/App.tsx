@@ -87,7 +87,7 @@ function App() {
             )} */}
             <iframe
               src="https://app.relevanceai.com/form/f1db6c/e62b62e6-958e-4c75-93da-0c8dc2824a12?version=latest"
-              width="800px"
+              width="700px"
               height="750px"
               frameBorder="0"
             ></iframe>
